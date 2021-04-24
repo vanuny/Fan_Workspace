@@ -129,3 +129,100 @@ FROM
 	employees
 WHERE 
 	last_name LIKE '%a%';#百分号代表通配符
+	
+/*
+
+between and
+注意事项：
+1。提高代码简洁度
+2。between and 包含临界值
+3。临界值不要更换顺序
+
+*/
+# 查询员工编号100到120之间的员工信息
+SELECT 
+	*
+FROM
+	employees
+WHERE
+	employee_id >=100 AND employee_id<=120;
+	
+#---------------------
+SELECT 
+	*
+FROM
+	employees
+WHERE
+	employee_id BETWEEN 100 AND 120;
+
+#3.in关键字
+/*
+判断某字段的值是否属于In列表中的一项
+特点：
+	1.提高代码简洁度
+	2.in列表的值类型必须一致或者兼容
+
+*/
+
+#案例:查询员工的工种编号是IT_PROG/AG_VP/AD_PRES的一个员工名和工种编号
+SELECT
+	last_name,
+	job_id
+FROM
+	employees
+WHERE 
+	job_id = 'IT_PROG' OR job_id ='AD_VP'OR job_id ='AD_PRES'
+	
+#--------------------------------
+
+SELECT
+	last_name,
+	job_id
+FROM
+	employees
+WHERE 
+	job_id IN ('IT_PROG' ,'AD_VP','AD_PRES');
+
+#4. is null
+/*
+=或<>不能用于判断null值
+
+
+*/
+#案例：查询没有奖金的员工名和奖金率
+SELECT
+	last_name,
+	commission_pct
+FROM 
+	employees
+WHERE
+	commission_pct IS  NULL;
+
+#案例：查询有奖金的员工名和奖金率
+SELECT
+	last_name,
+	commission_pct
+FROM 
+	employees
+WHERE
+	commission_pct IS NOT NULL;
+
+#安全等于  <=>
+#案例：查询没有奖金的员工名和奖金率
+SELECT
+	last_name,
+	commission_pct
+FROM 
+	employees
+WHERE
+	commission_pct  <=>  NULL;
+
+#查询工资为12000的员工信息
+SELECT
+	last_name,
+	commission_pct,
+	salary
+FROM 
+	employees
+WHERE
+	salary <=> 12000;
